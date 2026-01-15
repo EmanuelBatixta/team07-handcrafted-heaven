@@ -4,4 +4,4 @@
 - Emanuel Oliveira
 - Jonathas Oliveira
 - Ibraim Vergara
-- Alex Condori
+- Alex Calizaya
