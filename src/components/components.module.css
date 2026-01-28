@@ -1,10 +1,10 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --btn: #8F9F8A;
-  --bg: #EDE6D8;
-  --hg-color : #C29439;
-  --dark-bg : #2B2B2B;
+    --background: #ffffff;
+    --foreground: #171717;
+    --btn: #8F9F8A;
+    --bg: #EDE6D8;
+    --hg-color: #C29439;
+    --dark-bg: #2B2B2B;
 }
 
 .header {
@@ -19,8 +19,8 @@
     flex-direction: row;
     align-items: center;
     gap: 15px;
-    
-    & h1{
+
+    & h1 {
         font-size: 2.5rem;
         font-weight: bolder;
         color: var(--dark-bg);
@@ -67,7 +67,90 @@ button:hover {
 }
 
 .poppins-light-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 300;
-  font-style: italic;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+}
+
+/* FOOTER */
+.footerContainer {
+    background-color: #8F9F8A;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+        "nav title"
+        "nav students"
+        "copyright copyright"
+    ;
+    gap: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+
+    padding: 20px;
+
+    @media (max-width: 768px) {
+        grid-template-areas:
+            "nav students"
+            "title title"
+            "copyright copyright";
+    }
+}
+
+.footerTitle {
+    grid-area: title;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+
+
+    }
+}
+
+
+.footerNav {
+    grid-area: nav;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+
+}
+
+.studentsList {
+    grid-area: students;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+
+    & ul {
+
+        text-align: left;
+    }
+}
+
+.copyright {
+    grid-area: copyright;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 }
