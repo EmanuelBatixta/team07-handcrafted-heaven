@@ -11,12 +11,12 @@ export default function Header() {
     return (
         <header className={styles.header}>
             <div className={styles.logo}>
-                <Image src="/handcraftedlogo.webp" alt="logo" width={200}height={200}></Image>    
+                <Image src="/handcraftedlogo.webp" alt="logo" width={70}height={70}></Image>    
                 <h1 className={poppins.className}>Group 07</h1>
             </div>
             <div className={styles.buttons}>
-                <button>Login</button>
-                <button>Signup</button>
+                <button className={styles.fullfill}>Login</button>
+                <button className={styles.outline}>Signup</button>
             </div>
         </header>
     )

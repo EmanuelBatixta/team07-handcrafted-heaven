@@ -2,6 +2,10 @@ import styles from './components.module.css'
 
 export default function Footer() {
     return(
-        <h1 className={styles.footer}>footer component</h1>
+        <>
+            <h1 className={styles.footer}>footer component</h1>
+
+            <span>©{new Date().getFullYear()} All rigths reserved</span>
+        </>
     )
 }
