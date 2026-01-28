@@ -1,17 +1,24 @@
 :root {
     --background: #ffffff;
     --foreground: #171717;
-    --btn: #8F9F8A;
-    --bg: #EDE6D8;
-    --hg-color: #C29439;
-    --dark-bg: #2B2B2B;
+    --btn: #8F9F8A;        
+    --bg: #EDE6D8;         
+    --hg-color: #C29439;   
+    --dark-bg: #2B2B2B;    
 }
+
 
 .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    background-color: var(--btn); 
+    padding: 0 2rem; 
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 .logo {
@@ -19,12 +26,13 @@
     flex-direction: row;
     align-items: center;
     gap: 15px;
+}
 
-    & h1 {
-        font-size: 2.5rem;
-        font-weight: bolder;
-        color: var(--dark-bg);
-    }
+.logo h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark-bg); 
+    margin: 0;
 }
 
 .buttons {
@@ -38,7 +46,8 @@
     color: var(--bg);
     padding: 1rem;
     border: none;
-    border-radius: .5rem;
+    border-radius: .5rem; 
+    font-weight: 600;
 }
 
 .outline {
@@ -47,19 +56,54 @@
     border: 1px solid var(--btn);
     border-radius: .5rem;
     padding: 1rem;
+    font-weight: 600;
 }
 
+.header .fullfill {
+    background-color: var(--dark-bg) !important; 
+    color: var(--bg) !important;
+    padding: 0.8rem 1.5rem;
+}
+
+.header .outline {
+    color: var(--dark-bg) !important; 
+    border-color: var(--dark-bg) !important;
+}
+
+.header .fullfill:hover, 
+.header .outline:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    transition: all 0.2s;
+}
 
 button:hover {
     cursor: pointer;
     opacity: .8;
 }
 
+
 .nav {
     display: flex;
     flex-direction: row;
-    gap: 10px;
-    justify-content: space-evenly;
+    gap: 40px; 
+    justify-content: center;
+    background-color: var(--background); 
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+
+.nav a {
+    color: var(--dark-bg); 
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: var(--hg-color); 
 }
 
 .footer {
@@ -72,7 +116,6 @@ button:hover {
     font-style: italic;
 }
 
-/* FOOTER */
 .footerContainer {
     background-color: #8F9F8A;
     display: grid;
@@ -80,15 +123,16 @@ button:hover {
     grid-template-areas:
         "nav title"
         "nav students"
-        "copyright copyright"
-    ;
+        "copyright copyright";
     gap: 10px;
     justify-content: space-evenly;
     align-items: center;
-
     padding: 20px;
+    margin-top: 50px;
+}
 
-    @media (max-width: 768px) {
+@media (max-width: 768px) {
+    .footerContainer {
         grid-template-areas:
             "nav students"
             "title title"
@@ -102,14 +146,11 @@ button:hover {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
-    @media (max-width: 768px) {
-        flex-direction: column;
-
-
-    }
 }
 
+@media (max-width: 768px) {
+    .footerTitle { flex-direction: column; }
+}
 
 .footerNav {
     grid-area: nav;
@@ -118,11 +159,10 @@ button:hover {
     gap: 10px;
     justify-content: space-evenly;
     align-items: center;
+}
 
-    @media (max-width: 768px) {
-        flex-direction: column;
-    }
-
+@media (max-width: 768px) {
+    .footerNav { flex-direction: column; }
 }
 
 .studentsList {
@@ -131,15 +171,12 @@ button:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
 
-    @media (max-width: 768px) {
-        flex-direction: column;
-    }
+.studentsList ul { text-align: left; }
 
-    & ul {
-
-        text-align: left;
-    }
+@media (max-width: 768px) {
+    .studentsList { flex-direction: column; }
 }
 
 .copyright {
@@ -149,8 +186,8 @@ button:hover {
     gap: 10px;
     justify-content: space-evenly;
     align-items: center;
+}
 
-    @media (max-width: 768px) {
-        flex-direction: column;
-    }
+@media (max-width: 768px) {
+    .copyright { flex-direction: column; }
 }
