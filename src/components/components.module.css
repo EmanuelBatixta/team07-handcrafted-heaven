@@ -38,50 +38,57 @@
 .buttons {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 12px;
+    align-items: center;
 }
 
 .fullfill {
     background: var(--btn);
     color: var(--bg);
-    padding: 1rem;
+    padding: 0.7rem 1.5rem;
     border: none;
-    border-radius: .5rem; 
+    border-radius: 50px; 
     font-weight: 600;
+    font-size: 0.95rem;
 }
 
 .outline {
     color: var(--btn);
     background: transparent;
-    border: 1px solid var(--btn);
-    border-radius: .5rem;
-    padding: 1rem;
+    border: 2px solid var(--btn);
+    border-radius: 50px; 
+    padding: 0.7rem 1.5rem;
     font-weight: 600;
+    font-size: 0.95rem;
 }
 
 .header .fullfill {
-    background-color: var(--dark-bg) !important; 
-    color: var(--bg) !important;
-    padding: 0.8rem 1.5rem;
+    background-color: var(--bg) !important;
+    color: var(--btn) !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .header .outline {
-    color: var(--dark-bg) !important; 
-    border-color: var(--dark-bg) !important;
+    color: var(--bg) !important;
+    border-color: var(--bg) !important;
 }
 
-.header .fullfill:hover, 
-.header .outline:hover {
-    opacity: 0.9;
+.header .fullfill:hover {
+    background-color: #ffffff !important;
     transform: translateY(-2px);
-    transition: all 0.2s;
+    opacity: 1;
+}
+
+.header .outline:hover {
+    background-color: var(--bg) !important;
+    color: var(--btn) !important;
+    transform: translateY(-2px);
+    opacity: 1;
 }
 
 button:hover {
     cursor: pointer;
-    opacity: .8;
 }
-
 
 .nav {
     display: flex;
