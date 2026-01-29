@@ -113,6 +113,11 @@ button:hover {
     color: var(--hg-color); 
 }
 
+.actualPage{
+    color: var(--hg-color);
+    text-decoration: underline;
+}
+
 .footer {
     text-align: center;
 }
