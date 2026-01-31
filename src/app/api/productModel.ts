@@ -1,9 +1,8 @@
 'use server'
 
-import { PrismaClient } from "../../generated/prisma/client";
+import { PrismaClient } from "../../../generated/prisma/client";
 import * as z from "zod"
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const productSchema = z.object({
     userPrivate_id: z.string(),
     category: z.string(),

@@ -1,9 +1,8 @@
 'use server'
 
-import { PrismaClient } from "../../generated/prisma/client";
+import { PrismaClient } from "../../../generated/prisma/client";
 import * as z from "zod"
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const userSchema = z.object({
     name: z.string().min(2,{error: 'Name must be least 2 characters long'}).trim(),
     email: z.email({error: 'Please, enter a valid email'}).trim(),

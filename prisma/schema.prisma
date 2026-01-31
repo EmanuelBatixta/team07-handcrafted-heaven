@@ -14,30 +14,39 @@ datasource db {
 }
 
 model User {
-  private_id String    @unique @default(uuid())
-  public     Int       @unique @default(autoincrement())
+  private_id String    @id @unique @default(uuid())
+  public_id  Int       @unique @default(autoincrement())
   name       String
   email      String    @unique
   password   String
   products   Product[]
   reviews    Review[]
+  carts      Cart?
 }
 
 model Product {
-  id             String   @unique @default(uuid())
+  id             String   @id @unique @default(uuid())
   userPrivate_id String
   image_link     String?
   category       String
   review         Review[]
+  cart           Cart[]   @relation("MyRelationTable")
   user           User     @relation(fields: [userPrivate_id], references: [private_id])
 }
 
 model Review {
-  id             String  @unique @default(uuid())
+  id             String  @id @unique @default(uuid())
   stars          Int
   comment        String
   productId      String
   userPrivate_id String
   product_id     Product @relation(fields: [productId], references: [id])
   user_id        User    @relation(fields: [userPrivate_id], references: [private_id])
+}
+
+model Cart {
+  id             Int       @id @unique @default(autoincrement())
+  userPrivate_id String    @unique
+  products       Product[] @relation("MyRelationTable")
+  user           User      @relation(fields: [userPrivate_id], references: [private_id])
 }

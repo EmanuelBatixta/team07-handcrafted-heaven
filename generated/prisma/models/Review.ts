@@ -241,7 +241,7 @@ export type ReviewWhereUniqueInput = Prisma.AtLeast<{
   userPrivate_id?: Prisma.StringFilter<"Review"> | string
   product_id?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
   user_id?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+}, "id" | "id">
 
 export type ReviewOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
