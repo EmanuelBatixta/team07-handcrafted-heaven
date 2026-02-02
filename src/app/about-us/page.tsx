@@ -1,4 +1,10 @@
 import styles from './about.module.css';
+import { Poppins } from 'next/font/google';
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 
 export default function About() {
   return (
@@ -6,7 +12,7 @@ export default function About() {
       
       {/* Hero */}
       <header className={styles.header}>
-        <h1 className={styles.title}>About Handcrafted Haven</h1>
+        <h1 className={`${poppins.className} ${styles.title}`}>About Handcrafted Haven</h1>
         <p className={styles.subtitle}>
           Connecting passionate artisans with lovers of unique, handmade products.
         </p>

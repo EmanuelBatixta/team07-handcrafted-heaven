@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from 'next/link'
 import styles from './components.module.css'
 import { Poppins } from 'next/font/google';
 
@@ -21,8 +22,12 @@ export default function Header() {
                 <h1 className={poppins.className}>Group 07</h1>
             </div>
             <div className={styles.buttons}>
-                <button className={`${styles.fullfill} ${poppins.className}`}>Login</button>
-                <button className={`${styles.outline} ${poppins.className}`}>Signup</button>
+                <Link href="/login">
+                    <button className={`${styles.fullfill} ${poppins.className}`}>Login</button>
+                </Link>
+                <Link href="/signup">
+                    <button className={`${styles.outline} ${poppins.className}`}>Signup</button>
+                </Link>
             </div>
         </header>
     )

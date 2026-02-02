@@ -11,7 +11,7 @@ export default function Footer() {
                     <Link href="/product-list">Products</Link>
                     <Link href="/about-us">About Us</Link>
                     <Link href="/login">Login</Link>
-                    <Link href="/register">Register</Link>
+                    <Link href="/signup">Signup</Link>
                 </nav >
 
 
@@ -26,7 +26,7 @@ export default function Footer() {
                         <li>Alex C.</li>
                         <li>Emanuel Batista</li>
                         <li>John Carlo D.</li>
-                        <li>John Carlo D.</li>
+                        <li>Tyson Pace</li>
                         <li>John Carlo D.</li>
                     </ul>
                 </div>
