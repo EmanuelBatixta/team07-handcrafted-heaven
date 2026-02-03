@@ -150,6 +150,9 @@ button:hover {
             "title title"
             "copyright copyright";
     }
+    .buttons, .logo {
+        flex-direction: column;
+    }
 }
 
 .footerTitle {

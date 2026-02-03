@@ -22,6 +22,7 @@ export default function Header() {
                 <h1 className={poppins.className}>Group 07</h1>
             </div>
             <div className={styles.buttons}>
+                <a href="/cart"><Image src="/carticon.png" alt="cart" width={45} height={45}></Image></a>
                 <Link href="/login">
                     <button className={`${styles.fullfill} ${poppins.className}`}>Login</button>
                 </Link>
