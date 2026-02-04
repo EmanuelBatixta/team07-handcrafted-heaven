@@ -1,5 +1,6 @@
 import styles from './product.module.css';
 import { Poppins } from 'next/font/google';
+import {Product}  from '../api/productModel';
 import Image from 'next/image';
 
 const poppins = Poppins({
@@ -14,6 +15,7 @@ export default function ProductList() {
         <div className={styles.container}>
             {/* Example products */}
             {/* Delete Later when filling from database */}
+
             <div className={styles.product}>
                 <Image src="/placeholder.jpg" alt="placeholder" width={200} height={200}></Image>
                 <h2 className={styles.productTitle}>Product 1</h2>
