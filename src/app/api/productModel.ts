@@ -9,16 +9,20 @@ const productSchema = z.object({
     image_link: z.string()
 })
 
-type product = z.infer<typeof productSchema>
+//type product = z.infer<typeof productSchema>
 
 export class Product{
     constructor(private prisma: PrismaClient) {}
 
-    async createProduct(data: product){
-        this.prisma.product.create({data})
+    async createProduct(data: any){
+        return this.prisma.product.create({data})
     }
 
     async deleteProduct(id: string){
-        this.prisma.product.delete({where: {id: id}})
+        return this.prisma.product.delete({where: {id: id}})
+    }
+
+    async getAll(){
+        return this.prisma.product.findMany()
     }
 }

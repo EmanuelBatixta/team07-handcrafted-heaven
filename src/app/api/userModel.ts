@@ -24,10 +24,10 @@ export class User{
     constructor(private prisma: PrismaClient) {}
 
     async createUser(data: userType) {
-        this.prisma.user.create({data})
+        return this.prisma.user.create({data})
     }
 
     async deleteUser(id: string){
-        this.prisma.user.delete({where:{private_id: id}})
+        return this.prisma.user.delete({where:{private_id: id}})
     }
 }

@@ -1,5 +1,6 @@
 import styles from './product.module.css';
 import { Poppins } from 'next/font/google';
+import {Product}  from '../api/productModel';
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,6 +14,7 @@ export default function ProductList() {
         <div className={styles.container}>
             {/* Example products */}
             {/* Delete Later when filling from database */}
+
             <div className={styles.product}>
                 <h2 className={styles.productTitle}>Product 1</h2>
                 <p className={styles.productDescription}>Description of Product 1</p>

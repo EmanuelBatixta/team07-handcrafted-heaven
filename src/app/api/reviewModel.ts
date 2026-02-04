@@ -16,11 +16,11 @@ export class Review{
     constructor(private prisma: PrismaClient) {}
 
     async createReview(data: review) {
-        this.prisma.review.create({data})
+        return this.prisma.review.create({data})
     }
 
     async editReview(id: string ,data: Partial<review>){
-        this.prisma.review.update(
+        return this.prisma.review.update(
            { 
             where:{ id: id},
             data: data
@@ -29,6 +29,6 @@ export class Review{
     }
 
     async deleteReview(id: string){
-        this.prisma.review.delete({where: {id: id}})
+        return this.prisma.review.delete({where: {id: id}})
     }
 }
