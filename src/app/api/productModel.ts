@@ -3,22 +3,23 @@
 import { PrismaClient } from "../../../generated/prisma/client";
 import * as z from "zod"
 
-const productSchema = z.object({
-    userPrivate_id: z.string(),
+export const productSchema = z.object({
+    userPrivate_id: z.number(),
     category: z.string(),
-    image_link: z.string()
+    image_link: z.string(),
+    price: z.float32()
 })
 
-//type product = z.infer<typeof productSchema>
+type product = z.infer<typeof productSchema>
 
 export class Product{
     constructor(private prisma: PrismaClient) {}
 
-    async createProduct(data: any){
+    async createProduct(data: product){
         return this.prisma.product.create({data})
     }
 
-    async deleteProduct(id: string){
+    async deleteProduct(id: number){
         return this.prisma.product.delete({where: {id: id}})
     }
 
