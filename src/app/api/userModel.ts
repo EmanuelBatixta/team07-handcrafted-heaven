@@ -1,5 +1,6 @@
 'use server'
 
+import bcrypt from "bcryptjs";
 import { PrismaClient } from "../../../generated/prisma/client";
 import * as z from "zod"
 
@@ -23,11 +24,22 @@ type userType = z.infer<typeof userSchema>
 export class User{
     constructor(private prisma: PrismaClient) {}
 
-    async createUser(data: userType) {
-        return this.prisma.user.create({data})
+    async createUser(info: userType) {
+        const saltRounds = 10
+        const hashedpass = await bcrypt.hash(info.password, saltRounds)
+        const {name, email, password} = info
+        const data = {name, email, password: hashedpass}
+        return this.prisma.user.create({ data })
     }
 
-    async deleteUser(id: string){
+    async deleteUser(id: number){
         return this.prisma.user.delete({where:{private_id: id}})
+    }
+
+    async getUserByEmail(email: string){
+        const data = await this.prisma.user.findUnique({where: { email: email}})
+        // @ts-expect-error
+        const {...secureData, password } = data
+        return secureData 
     }
 }
