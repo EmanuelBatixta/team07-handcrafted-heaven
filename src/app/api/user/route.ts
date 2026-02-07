@@ -1,8 +1,8 @@
-'use server'
-
+import prisma from "@/app/db/db"
+import { NextRequest } from 'next/server'
 import bcrypt from "bcryptjs";
-import { PrismaClient } from "../../../generated/prisma/client";
 import * as z from "zod"
+import { info } from "console";
 
 const userSchema = z.object({
     name: z.string().min(2,{error: 'Name must be least 2 characters long'}).trim(),
@@ -21,25 +21,27 @@ const userSchema = z.object({
 
 type userType = z.infer<typeof userSchema>
 
-export class User{
-    constructor(private prisma: PrismaClient) {}
-
-    async createUser(info: userType) {
+export async function POST(request: NextRequest) {
+    const body = await request.json()
+    const { info } = body
+    try{
         const saltRounds = 10
-        const hashedpass = await bcrypt.hash(info.password, saltRounds)
         const { name, email, password } = info
+        const hashedpass = await bcrypt.hash(password, saltRounds)
         const data = {name, email, password: hashedpass}
-        return this.prisma.user.create({ data })
-    }
-
-    async deleteUser(id: number){
-        return this.prisma.user.delete({where:{private_id: id}})
-    }
-
-    async getUserByEmail(email: string){
-        const data = await this.prisma.user.findUnique({where: { email: email}})
-        // @ts-expect-error
-        const {...secureData, password } = data
-        return secureData 
+        return prisma.user.create({ data, omit: password})
+    } catch {
+        return {code: 204, error: 'not possible create'}
     }
 }
+
+export async function DELETE(request: NextRequest, {params}: {params: {id:string}}) {
+    const {id} = params
+    const id_int = parseInt(id)
+    try {
+        return await prisma.user.delete({where: {private_id: id_int}})
+    } catch {
+        return {code: 400, error: 'not possible to delete'}
+    }
+}
+ 

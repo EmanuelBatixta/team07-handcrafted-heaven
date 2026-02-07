@@ -31,6 +31,7 @@ model Product {
   review        Review[]
   price         Float
   user          User     @relation(fields: [userPublic_id], references: [public_id])
+  description   String
 }
 
 model Review {

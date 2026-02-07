@@ -42,6 +42,7 @@ export type ProductMinAggregateOutputType = {
   image_link: string | null
   category: string | null
   price: number | null
+  description: string | null
 }
 
 export type ProductMaxAggregateOutputType = {
@@ -50,6 +51,7 @@ export type ProductMaxAggregateOutputType = {
   image_link: string | null
   category: string | null
   price: number | null
+  description: string | null
 }
 
 export type ProductCountAggregateOutputType = {
@@ -58,6 +60,7 @@ export type ProductCountAggregateOutputType = {
   image_link: number
   category: number
   price: number
+  description: number
   _all: number
 }
 
@@ -78,6 +81,7 @@ export type ProductMinAggregateInputType = {
   image_link?: true
   category?: true
   price?: true
+  description?: true
 }
 
 export type ProductMaxAggregateInputType = {
@@ -86,6 +90,7 @@ export type ProductMaxAggregateInputType = {
   image_link?: true
   category?: true
   price?: true
+  description?: true
 }
 
 export type ProductCountAggregateInputType = {
@@ -94,6 +99,7 @@ export type ProductCountAggregateInputType = {
   image_link?: true
   category?: true
   price?: true
+  description?: true
   _all?: true
 }
 
@@ -189,6 +195,7 @@ export type ProductGroupByOutputType = {
   image_link: string | null
   category: string
   price: number
+  description: string
   _count: ProductCountAggregateOutputType | null
   _avg: ProductAvgAggregateOutputType | null
   _sum: ProductSumAggregateOutputType | null
@@ -220,6 +227,7 @@ export type ProductWhereInput = {
   image_link?: Prisma.StringNullableFilter<"Product"> | string | null
   category?: Prisma.StringFilter<"Product"> | string
   price?: Prisma.FloatFilter<"Product"> | number
+  description?: Prisma.StringFilter<"Product"> | string
   review?: Prisma.ReviewListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
@@ -230,6 +238,7 @@ export type ProductOrderByWithRelationInput = {
   image_link?: Prisma.SortOrderInput | Prisma.SortOrder
   category?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   review?: Prisma.ReviewOrderByRelationAggregateInput
   user?: Prisma.UserOrderByWithRelationInput
 }
@@ -243,6 +252,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   image_link?: Prisma.StringNullableFilter<"Product"> | string | null
   category?: Prisma.StringFilter<"Product"> | string
   price?: Prisma.FloatFilter<"Product"> | number
+  description?: Prisma.StringFilter<"Product"> | string
   review?: Prisma.ReviewListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "id">
@@ -253,6 +263,7 @@ export type ProductOrderByWithAggregationInput = {
   image_link?: Prisma.SortOrderInput | Prisma.SortOrder
   category?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   _count?: Prisma.ProductCountOrderByAggregateInput
   _avg?: Prisma.ProductAvgOrderByAggregateInput
   _max?: Prisma.ProductMaxOrderByAggregateInput
@@ -269,12 +280,14 @@ export type ProductScalarWhereWithAggregatesInput = {
   image_link?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   category?: Prisma.StringWithAggregatesFilter<"Product"> | string
   price?: Prisma.FloatWithAggregatesFilter<"Product"> | number
+  description?: Prisma.StringWithAggregatesFilter<"Product"> | string
 }
 
 export type ProductCreateInput = {
   image_link?: string | null
   category: string
   price: number
+  description: string
   review?: Prisma.ReviewCreateNestedManyWithoutProduct_idInput
   user: Prisma.UserCreateNestedOneWithoutProductsInput
 }
@@ -285,6 +298,7 @@ export type ProductUncheckedCreateInput = {
   image_link?: string | null
   category: string
   price: number
+  description: string
   review?: Prisma.ReviewUncheckedCreateNestedManyWithoutProduct_idInput
 }
 
@@ -292,6 +306,7 @@ export type ProductUpdateInput = {
   image_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   review?: Prisma.ReviewUpdateManyWithoutProduct_idNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutProductsNestedInput
 }
@@ -302,6 +317,7 @@ export type ProductUncheckedUpdateInput = {
   image_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   review?: Prisma.ReviewUncheckedUpdateManyWithoutProduct_idNestedInput
 }
 
@@ -311,12 +327,14 @@ export type ProductCreateManyInput = {
   image_link?: string | null
   category: string
   price: number
+  description: string
 }
 
 export type ProductUpdateManyMutationInput = {
   image_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductUncheckedUpdateManyInput = {
@@ -325,6 +343,7 @@ export type ProductUncheckedUpdateManyInput = {
   image_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductListRelationFilter = {
@@ -343,6 +362,7 @@ export type ProductCountOrderByAggregateInput = {
   image_link?: Prisma.SortOrder
   category?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  description?: Prisma.SortOrder
 }
 
 export type ProductAvgOrderByAggregateInput = {
@@ -356,6 +376,7 @@ export type ProductMaxOrderByAggregateInput = {
   image_link?: Prisma.SortOrder
   category?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  description?: Prisma.SortOrder
 }
 
 export type ProductMinOrderByAggregateInput = {
@@ -364,6 +385,7 @@ export type ProductMinOrderByAggregateInput = {
   image_link?: Prisma.SortOrder
   category?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  description?: Prisma.SortOrder
 }
 
 export type ProductSumOrderByAggregateInput = {
@@ -448,6 +470,7 @@ export type ProductCreateWithoutUserInput = {
   image_link?: string | null
   category: string
   price: number
+  description: string
   review?: Prisma.ReviewCreateNestedManyWithoutProduct_idInput
 }
 
@@ -456,6 +479,7 @@ export type ProductUncheckedCreateWithoutUserInput = {
   image_link?: string | null
   category: string
   price: number
+  description: string
   review?: Prisma.ReviewUncheckedCreateNestedManyWithoutProduct_idInput
 }
 
@@ -494,12 +518,14 @@ export type ProductScalarWhereInput = {
   image_link?: Prisma.StringNullableFilter<"Product"> | string | null
   category?: Prisma.StringFilter<"Product"> | string
   price?: Prisma.FloatFilter<"Product"> | number
+  description?: Prisma.StringFilter<"Product"> | string
 }
 
 export type ProductCreateWithoutReviewInput = {
   image_link?: string | null
   category: string
   price: number
+  description: string
   user: Prisma.UserCreateNestedOneWithoutProductsInput
 }
 
@@ -509,6 +535,7 @@ export type ProductUncheckedCreateWithoutReviewInput = {
   image_link?: string | null
   category: string
   price: number
+  description: string
 }
 
 export type ProductCreateOrConnectWithoutReviewInput = {
@@ -531,6 +558,7 @@ export type ProductUpdateWithoutReviewInput = {
   image_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   user?: Prisma.UserUpdateOneRequiredWithoutProductsNestedInput
 }
 
@@ -540,6 +568,7 @@ export type ProductUncheckedUpdateWithoutReviewInput = {
   image_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductCreateManyUserInput = {
@@ -547,12 +576,14 @@ export type ProductCreateManyUserInput = {
   image_link?: string | null
   category: string
   price: number
+  description: string
 }
 
 export type ProductUpdateWithoutUserInput = {
   image_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   review?: Prisma.ReviewUpdateManyWithoutProduct_idNestedInput
 }
 
@@ -561,6 +592,7 @@ export type ProductUncheckedUpdateWithoutUserInput = {
   image_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   review?: Prisma.ReviewUncheckedUpdateManyWithoutProduct_idNestedInput
 }
 
@@ -569,6 +601,7 @@ export type ProductUncheckedUpdateManyWithoutUserInput = {
   image_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -608,6 +641,7 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   image_link?: boolean
   category?: boolean
   price?: boolean
+  description?: boolean
   review?: boolean | Prisma.Product$reviewArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
@@ -619,6 +653,7 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   image_link?: boolean
   category?: boolean
   price?: boolean
+  description?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
@@ -628,6 +663,7 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   image_link?: boolean
   category?: boolean
   price?: boolean
+  description?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
@@ -637,9 +673,10 @@ export type ProductSelectScalar = {
   image_link?: boolean
   category?: boolean
   price?: boolean
+  description?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userPublic_id" | "image_link" | "category" | "price", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userPublic_id" | "image_link" | "category" | "price" | "description", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   review?: boolean | Prisma.Product$reviewArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -664,6 +701,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     image_link: string | null
     category: string
     price: number
+    description: string
   }, ExtArgs["result"]["product"]>
   composites: {}
 }
@@ -1094,6 +1132,7 @@ export interface ProductFieldRefs {
   readonly image_link: Prisma.FieldRef<"Product", 'String'>
   readonly category: Prisma.FieldRef<"Product", 'String'>
   readonly price: Prisma.FieldRef<"Product", 'Float'>
+  readonly description: Prisma.FieldRef<"Product", 'String'>
 }
     
 
