@@ -18,3 +18,11 @@
   width: 35%;
   height: auto;
 }
+
+.home {
+  margin: 5px;
+}
+
+html, body{
+  margin: 0;
+}

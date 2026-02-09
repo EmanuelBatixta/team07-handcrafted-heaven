@@ -5,4 +5,5 @@ export type Product = {
   price: number;
   userPublic_id: string;
   description: string;
+  name: string;
 };
