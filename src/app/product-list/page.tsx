@@ -1,6 +1,6 @@
 import styles from './product.module.css';
 import { Poppins } from 'next/font/google';
-import {Product}  from '../api/productModel';
+import {product}  from '../api/products/route';
 import Image from 'next/image';
 import { fetchProducts } from '../lib/products';
 
