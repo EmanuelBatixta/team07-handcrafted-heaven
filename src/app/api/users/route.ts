@@ -23,15 +23,16 @@ type userType = z.infer<typeof userSchema>
 
 export async function POST(request: NextRequest) {
     const body = await request.json()
-    const { info } = body
+    console.log(body)
     try{
+        const { name, email, password } = body
+        const emailUsing = await prisma.user.findFirst({where: {email: email}})
+        if (emailUsing) { return {code:400, error: 'email already is using'}}
         const saltRounds = 10
-        const { name, email, password } = info
         const hashedpass = await bcrypt.hash(password, saltRounds)
-        const data = {name, email, password: hashedpass}
-        return prisma.user.create({ data, omit: password})
+        return prisma.user.create({ data:{name, email, password: hashedpass}, omit: password})
     } catch {
-        return {code: 204, error: 'not possible create'}
+        return {code: 204, error: 'no possible create a new user'}
     }
 }
 

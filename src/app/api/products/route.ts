@@ -11,7 +11,7 @@ export const productSchema = z.object({
     description: z.string()
 })
 
-type product = z.infer<typeof productSchema>
+export type product = z.infer<typeof productSchema>
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
     try{
