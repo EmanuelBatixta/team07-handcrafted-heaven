@@ -10,7 +10,7 @@ const poppins = Poppins({
 
 export default function Home() {
   return (
-    <div>
+    <div className={styles.home}>
       <h1 className={poppins.className}>Home</h1>
 
       <div className={styles.container}>
