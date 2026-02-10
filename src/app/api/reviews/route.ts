@@ -1,5 +1,5 @@
 import prisma from "@/app/db/db"
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 import * as z from "zod"
 
@@ -15,16 +15,16 @@ type review = z.infer<typeof reviewSchema>
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
     const { id } = params
     const id_int = parseInt(id)
-    return await prisma.review.findMany({where: {productId: id_int}})
+    return NextResponse.json({data: await prisma.review.findMany({where: {productId: id_int}}), status: 200})
 }
   
 export async function POST(request: NextRequest) {
     const body = await request.json()
-    const {data} = body
+    const { data } = body
     try{
-        return await prisma.review.create({data})
+        return NextResponse.json({data: await prisma.review.create({data}), status: 200})
     } catch {
-        return {code: 204, error: 'not possible create'}
+        return NextResponse.json({status: 204, error: 'not possible create'})
     }
 }
  
@@ -34,9 +34,9 @@ export async function PUT(request: NextRequest, {params}: {params: {id:string}})
     const {data} = body
     const id_int = parseInt(id)
     try {
-        return await prisma.review.update({where: {id: id_int}, data:data})
+        return NextResponse.json({data: await prisma.review.update({where: {id: id_int}, data:data}), status: 200})
     } catch {
-        return {code: 204, error: 'not possible to update'}
+        return NextResponse.json({status: 204, error: 'not possible to update'})
     }
 }
  
@@ -44,9 +44,9 @@ export async function DELETE(request: NextRequest, {params}: {params: {id:string
     const {id} = params
     const id_int = parseInt(id)
     try {
-        return await prisma.review.delete({where: {id: id_int}})
+        return NextResponse.json({data: await prisma.review.delete({where: {id: id_int}})})
     } catch {
-        return {code: 400, error: 'not possible to delete'}
+        return NextResponse.json({code: 400, error: 'not possible to delete'})
     }
 }
  

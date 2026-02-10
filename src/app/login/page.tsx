@@ -13,7 +13,7 @@ const poppins = Poppins({
 
 export default function Login() {
     const searchParams = useSearchParams();
-    const callbackUrl = searchParams.get('callbackUrl') || '/prodcut-list';
+    const callbackUrl = searchParams.get('callbackUrl') || '/product-list';
     const [errorMessage, formAction, isPending] = useActionState(
     authenticate,
     undefined,
@@ -24,11 +24,11 @@ export default function Login() {
             <form action={formAction} className={styles.form}>
                 <div className={styles.field}>
                     <label htmlFor='email'>Email: </label>
-                    <input type="email" placeholder="Email" autoComplete='email' autoFocus id='email' required/>
+                    <input type="email" placeholder="Email" autoComplete='email' name='email' autoFocus id='email' required/>
                 </div>
                 <div className={styles.field}>
                     <label htmlFor='password'>Password: </label>
-                    <input type="password" placeholder="Password" id='password'required minLength={8}/>
+                    <input type="password" placeholder="Password" id='password' name='password'required minLength={8}/>
                 </div>
                 <input type="hidden" name="redirectTo" value={callbackUrl} />
                 <button type="submit" className={`${poppins.className} ${styles.complete}`} aria-disabled={isPending}>Login</button>
@@ -38,7 +38,7 @@ export default function Login() {
                     >
                     {errorMessage && (
                         <>
-                            <p className="text-sm text-red-500">{errorMessage}</p>
+                            <p className="error-message">❌ {errorMessage}</p>
                         </>
                     )}
                 </div>

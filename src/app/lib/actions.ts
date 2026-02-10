@@ -27,7 +27,8 @@ export async function authenticate(
 export async function signup( prevState: string | undefined,
 formData: FormData ){
   try{
-    const result = await fetch('/signup/api/users/', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(formData)})
+    //const data = Object.fromEntries(formData.entries())
+    const result = await fetch(`${process.env.BASE_URL || 'https://handcrafted-heaven-team07.vercel.app/'}/api/users/`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(formData)})
 
     if (!result){
       throw new Error('Error to create user')

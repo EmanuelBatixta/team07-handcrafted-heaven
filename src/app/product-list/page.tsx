@@ -1,10 +1,5 @@
 import styles from './product.module.css';
 import { Poppins } from 'next/font/google';
-<<<<<<< HEAD
-//import {Product}  from '../api/product/route'; (does not work, uncomment when route is fixed)
-=======
-import {product}  from '../api/products/route';
->>>>>>> emanuel
 import Image from 'next/image';
 import { fetchProducts } from '../lib/products';
 import Link from 'next/link';

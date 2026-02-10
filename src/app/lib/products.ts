@@ -7,11 +7,7 @@ export async function fetchProducts(): Promise<Product[]> {
     try {
         const products = await sql`SELECT * FROM "Product"`;
 
-<<<<<<< HEAD
         return products as unknown as Product[];
-=======
-        return products; 
->>>>>>> emanuel
     } catch (err) {
         console.error('Database Error:', err);
         throw new Error('Failed to fetch all products.');
