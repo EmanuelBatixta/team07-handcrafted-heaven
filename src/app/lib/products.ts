@@ -35,3 +35,4 @@ export async function fetchProduct(
     throw new Error('Failed to fetch product.');
   }
 }
+

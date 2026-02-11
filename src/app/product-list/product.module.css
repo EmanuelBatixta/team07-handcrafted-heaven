@@ -2,6 +2,24 @@
     text-align: center;
     background-color: #C89B6A;
     padding: 10px;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter {
+    padding: 1px;
+    margin: 5px;
+    justify-content: center;
+    width: 40px;
+}
+
+.catalogButton {
+    display: flex;
+    flex-direction: row-reverse;
+    align-self: center;
 }
 
 .container {
