@@ -2,6 +2,7 @@
  
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import { NextResponse } from 'next/server';
  
 // ...
  
@@ -27,17 +28,17 @@ export async function authenticate(
 export async function signup( prevState: string | undefined,
 formData: FormData ){
   try{
-    //const data = Object.fromEntries(formData.entries())
-    const result = await fetch(`${process.env.BASE_URL || 'https://handcrafted-heaven-team07.vercel.app/'}/api/users/`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(formData)})
-
-    if (!result){
-      throw new Error('Error to create user')
+    const data = Object.fromEntries(formData.entries())
+    const result = await fetch(`${process.env.BASE_URL || 'https://handcrafted-heaven-team07.vercel.app'}/api/users/`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)})
+    if (result.status == 400){
+      const errData = await result.json()
+      throw new Error(errData.error)
     }
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-          return 'Invalid email or password. Verify your credentials and try again';
+          return 'Invalid data';
         default:
           return 'Something went wrong.';
       }

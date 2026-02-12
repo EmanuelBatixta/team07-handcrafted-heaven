@@ -20,8 +20,8 @@ export default function Login() {
   );
     return (
         <div>
-            <h1 className={poppins.className}>Login</h1>
             <form action={formAction} className={styles.form}>
+                <h1 className={poppins.className}>Login</h1>
                 <div className={styles.field}>
                     <label htmlFor='email'>Email: </label>
                     <input type="email" placeholder="Email" autoComplete='email' name='email' autoFocus id='email' required/>
@@ -38,7 +38,7 @@ export default function Login() {
                     >
                     {errorMessage && (
                         <>
-                            <p className="error-message">❌ {errorMessage}</p>
+                            <p className={styles.errorMessage}>❌ {errorMessage}</p>
                         </>
                     )}
                 </div>

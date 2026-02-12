@@ -4,6 +4,8 @@ import { authConfig } from '../auth.config';
 import { z } from 'zod';
 import bcrypt from 'bcryptjs';
 import prisma from '@/app/db/db';
+import { userSchema, FormState } from '@/app/lib/definitions'
+import { redirect } from 'next/navigation'
  
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
@@ -27,3 +29,28 @@ export const { auth, signIn, signOut } = NextAuth({
     }),
   ],
 });
+ 
+export async function signup(state: FormState, formData: FormData) {
+  const validatedFields = userSchema.safeParse({
+    name: formData.get('name'),
+    email: formData.get('email'),
+    password: formData.get('password'),
+  })
+  //@ts-ignore
+  const { name, email, password } = validatedFields.data
+  const saltRounds = 10
+  const hashedpass = await bcrypt.hash(password, saltRounds)
+  
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    }
+  }
+  if (await prisma.user.findUnique({where: {email: validatedFields.data.email}})){ return { message: 'This email is already in use'}}
+
+  const user = await prisma.user.create({data: {name: validatedFields.data.name, email: validatedFields.data.email, password: hashedpass}})
+
+  if(!user) { return {message: 'An error occurred while creating your account.',}}
+
+  redirect('/product-list')
+}

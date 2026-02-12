@@ -1,17 +1,6 @@
 import prisma from "@/app/db/db"
 import { NextRequest, NextResponse } from 'next/server'
 
-import * as z from "zod"
-
-const reviewSchema = z.object({
-    stars: z.int().min(1).max(5),
-    comment: z.string(),
-    productId: z.string(),
-    userPrivate_id: z.string(),
-})
-
-type review = z.infer<typeof reviewSchema>
-
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
     const { id } = params
     const id_int = parseInt(id)
