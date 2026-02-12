@@ -1,5 +1,5 @@
 import prisma from "@/app/db/db"
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 import * as z from "zod"
 
@@ -13,17 +13,25 @@ export const productSchema = z.object({
 
 export type product = z.infer<typeof productSchema>
 
-export async function GET(_request: NextRequest, { params }: { params: { id: string } }) {
-    try{
-        if (params == null){
-            return await prisma.product.findMany()
-        }
-        const { id } = params
-        const id_int = parseInt(id)
-        return await prisma.product.findMany({where: {id: id_int}})
-    } catch {
-        return {code: 400, error: 'not possible recive'}
-    }
+export async function GET(
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await context.params
+    const id_int = parseInt(id)
+
+    const product = await prisma.product.findUnique({
+      where: { id: id_int }
+    })
+
+    return NextResponse.json({ data: product })
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Not possible to receive" },
+      { status: 400 }
+    )
+  }
 }
  
 export async function PUT(request: NextRequest, {params}: {params: {id:string}}) {
