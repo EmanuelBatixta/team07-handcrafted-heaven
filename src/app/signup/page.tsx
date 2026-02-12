@@ -1,9 +1,10 @@
-'use client'
+"use client"
+
 import { useActionState } from 'react';
-import { signup } from '../lib/actions';
 import styles from './signup.module.css';
 import { Poppins } from 'next/font/google';
 import { useSearchParams } from 'next/navigation';
+import { signup } from '@/auth';
 
 const poppins = Poppins({
   subsets: ["latin"],
