@@ -1,6 +1,6 @@
 'use server'
  
-import { signIn } from '@/auth';
+//import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
  
 // ...
@@ -10,15 +10,12 @@ export async function authenticate(
   formData: FormData,
 ) {
   try {
+    const { signIn } = await import('@/auth');
+
     await signIn('credentials', formData);
   } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return 'Invalid email or password. Verify your credentials and try again';
-        default:
-          return 'Something went wrong.';
-      }
+    if (error instanceof Error) {
+      return 'Invalid email or password.';
     }
     throw error;
   }
