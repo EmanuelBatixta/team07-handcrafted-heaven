@@ -1,4 +1,5 @@
-'use client'
+'use client';
+export const dynamic = "force-dynamic";
 
 import { useSearchParams } from 'next/navigation';
 import { useActionState } from 'react';
@@ -13,7 +14,7 @@ const poppins = Poppins({
 
 export default function Login() {
     const searchParams = useSearchParams();
-    const callbackUrl = searchParams.get('callbackUrl') || '/prodcut-list';
+    const callbackUrl = searchParams.get('callbackUrl') || '/product-list' || '/about-list';
     const [errorMessage, formAction, isPending] = useActionState(
     authenticate,
     undefined,
