@@ -1,3 +1,5 @@
+'use server'
+
 import postgres from 'postgres';
 import { Product } from './definitions';
 
