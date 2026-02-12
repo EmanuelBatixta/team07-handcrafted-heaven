@@ -1,5 +1,5 @@
 import prisma from "@/app/db/db"
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 import * as z from "zod"
 
@@ -14,11 +14,19 @@ export const productSchema = z.object({
 export type product = z.infer<typeof productSchema>
 
 export async function POST(request: NextRequest) {
+  try {
     const body = await request.json()
-    const {data} = body
-    try{
-        return await prisma.product.create({data})
-    } catch {
-        return {code: 400, error: 'not possible create'}
-    }
+
+    const product = await prisma.product.create({
+      data: body
+    })
+
+    return NextResponse.json(product)
+
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Not possible to create product" },
+      { status: 400 }
+    )
+  }
 }
