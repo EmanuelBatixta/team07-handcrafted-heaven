@@ -13,7 +13,7 @@ export const productSchema = z.object({
 
 export type product = z.infer<typeof productSchema>
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(_request: NextRequest, { params }: { params: { id: string } }) {
     try{
         if (params == null){
             return await prisma.product.findMany()
@@ -48,7 +48,7 @@ export async function PUT(request: NextRequest, {params}: {params: {id:string}})
     }
 }
  
-export async function DELETE(request: NextRequest, {params}: {params: {id:string}}) {
+export async function DELETE(_request: NextRequest, {params}: {params: {id:string}}) {
     const {id} = params
     const id_int = parseInt(id)
     try {
