@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { useActionState } from 'react';
 import styles from './signup.module.css';
@@ -23,19 +23,19 @@ export default function Signup() {
                     <label htmlFor='name'>Full Name: </label>
                     <input type="text" placeholder="Name" id='name' autoFocus name='name' autoComplete='name'required/>
                 </div>
-                {/* {state?.errors?.name && <p>{state.errors.name}</p>} */}
+                {state?.errors?.name && <p>{state.errors.name}</p>}
 
                 <div className={styles.field}>
                     <label htmlFor='email'>Email: </label>
                     <input type="email" placeholder="Email" id='email' name='email' autoComplete='email'required/>
                 </div>
-                {/* {state?.errors?.email && <p>{state.errors.email}</p>} */}
+                {state?.errors?.email && <p>{state.errors.email}</p>}
 
                 <div className={styles.field}>
                     <label htmlFor='password'>Password: </label>
                     <input type="password" placeholder="Password" name='password' id='password' required minLength={8}/>
                 </div>
-                {/* {state?.errors?.password && (
+                {state?.errors?.password && (
                     <div>
                     <p>Password must:</p>
                     <ul>
@@ -44,7 +44,7 @@ export default function Signup() {
                         ))}
                     </ul>
                     </div>
-                )} */}
+                )}
                 <input type="hidden" name="redirectTo" value={callbackUrl} />
                 <button disabled={pending} type="submit" className={`${poppins.className} ${styles.complete}`}>Signup</button>
             </form>
