@@ -8,10 +8,6 @@
   justify-content: space-around;
 }
 
-.error-message {
-  color: rgb(161, 3, 3);
-}
-
 .row {
   display: flex;
   flex-direction: column;
