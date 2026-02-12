@@ -32,6 +32,7 @@ model Product {
   price         Float
   user          User     @relation(fields: [userPublic_id], references: [public_id])
   description   String
+  ratings       Rating[]
 }
 
 model Review {
@@ -42,4 +43,11 @@ model Review {
   userPublic_id String
   product_id    Product @relation(fields: [productId], references: [id])
   user_id       User    @relation(fields: [userPublic_id], references: [public_id])
+}
+
+model Rating {
+  id         Int     @id @unique @default(autoincrement())
+  stars      Int
+  id_product Product @relation(fields: [productId], references: [id])
+  productId  Int
 }
