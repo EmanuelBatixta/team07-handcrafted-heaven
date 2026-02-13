@@ -10,8 +10,6 @@ export default function Footer() {
                     <Link href="/">Home</Link>
                     <Link href="/product-list">Products</Link>
                     <Link href="/about-us">About Us</Link>
-                    <Link href="/login">Login</Link>
-                    <Link href="/signup">Signup</Link>
                 </nav >
 
 

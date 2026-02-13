@@ -16,14 +16,14 @@ export default function LoginContent() {
   const callbackUrl =
     searchParams.get('callbackUrl') || '/product-list'
 
-  const [errorMessage, formAction, isPending] =
+  const [errorMessage, formAction, pending] =
     useActionState(authenticate, undefined)
 
   return (
     <div>
-      <h1 className={poppins.className}>Login</h1>
 
       <form action={formAction} className={styles.form}>
+        <h1 className={poppins.className}>Login</h1>
         <div className={styles.field}>
           <label htmlFor="email">Email:</label>
           <input
@@ -53,14 +53,14 @@ export default function LoginContent() {
         <button
           type="submit"
           className={`${poppins.className} ${styles.complete}`}
-          aria-disabled={isPending}
+          disabled={pending}
         >
           Login
         </button>
 
         {errorMessage && (
-          <p className="text-sm text-red-500">
-            {errorMessage}
+          <p className={styles.errorMessage}>
+            ❌ {errorMessage}
           </p>
         )}
       </form>

@@ -2,6 +2,8 @@ import Image from "next/image"
 import Link from 'next/link'
 import styles from './components.module.css'
 import { Poppins } from 'next/font/google';
+import { logout, signOut } from "@/auth";
+import { verifySession } from "@/app/lib/dal";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -9,6 +11,7 @@ const poppins = Poppins({
 });
 
 export default function Header() {
+    const session = verifySession()
     return (
         <header className={styles.header}>
             <div className={styles.logo}>
@@ -23,11 +26,22 @@ export default function Header() {
             </div>
             <div className={styles.buttons}>
                 <Link href="/login">
-                    <button className={`${styles.fullfill} ${poppins.className}`}>Login</button>
+                    <button className={`${styles.fullfill} ${poppins.className}`} >Login</button>
                 </Link>
                 <Link href="/signup">
                     <button className={`${styles.outline} ${poppins.className}`}>Signup</button>
                 </Link>
+                <form className={styles.signout}
+                    action={logout}
+                >
+                    
+                <button
+                type="submit"
+                className={`${poppins.className} ${styles.fullfill}`}
+                >
+                LogOut
+                </button>
+                </form>
             </div>
         </header>
     )

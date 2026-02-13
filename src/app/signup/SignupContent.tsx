@@ -1,7 +1,6 @@
 'use client'
-
 import { useActionState } from 'react'
-import { signup } from '../lib/actions'
+import { signup } from '@/auth'
 import styles from './signup.module.css'
 import { Poppins } from 'next/font/google'
 import { useSearchParams } from 'next/navigation'
@@ -10,30 +9,29 @@ const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400'],
 })
-
 export default function SignupContent() {
   const searchParams = useSearchParams()
   const callbackUrl =
     searchParams.get('callbackUrl') || '/product-list'
 
-  const [errorMessage, formAction, isPending] =
+  const [state, formAction, pending] =
     useActionState(signup, undefined)
 
   return (
     <div>
-      <h1 className={poppins.className}>Signup</h1>
-
       <form action={formAction} className={styles.form}>
+        <h1 className={poppins.className}>Signup</h1>
         <div className={styles.field}>
-          <label htmlFor="name">Full Name:</label>
+          <label htmlFor="name">Name:</label>
           <input
             type="text"
             name="name"
             autoComplete="name"
             required
+            defaultValue={state?.values?.name}
           />
+          {state?.errors?.name && <p className={styles.errorMessage}>{state.errors.name}</p>}
         </div>
-
         <div className={styles.field}>
           <label htmlFor="email">Email:</label>
           <input
@@ -41,9 +39,11 @@ export default function SignupContent() {
             name="email"
             autoComplete="email"
             required
-          />
-        </div>
+            defaultValue={state?.values?.email}
 
+          />
+          {state?.errors?.email && <p className={styles.errorMessage}>{state.errors.email}</p>}
+        </div>
         <div className={styles.field}>
           <label htmlFor="password">Password:</label>
           <input
@@ -52,6 +52,16 @@ export default function SignupContent() {
             required
             minLength={8}
           />
+        {state?.errors?.password && (
+          <div>
+            <ul>
+              {/*@ts-ignore*/}
+              {state.errors.password.map((error) => (
+                <li  className={styles.errorMessage} key={error}>❌ {error}</li>
+              ))}
+            </ul>
+          </div>
+        )}
         </div>
 
         <input
@@ -59,20 +69,18 @@ export default function SignupContent() {
           name="redirectTo"
           value={callbackUrl}
         />
+        {/*@ts-ignore*/}
+        {state?.errors?.general?.map((err) => ( <p key={err} className={styles.errorMessage}>❌ {err}</p> ))}
+
 
         <button
           type="submit"
           className={`${poppins.className} ${styles.complete}`}
-          aria-disabled={isPending}
+          disabled={pending}
         >
-          Signup
+          Sign Up
         </button>
 
-        {errorMessage && (
-          <p className="text-sm text-red-500">
-            {errorMessage}
-          </p>
-        )}
       </form>
     </div>
   )
