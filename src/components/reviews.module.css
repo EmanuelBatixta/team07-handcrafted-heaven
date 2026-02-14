@@ -1,0 +1,117 @@
+.container {
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: #fafafa;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    font-size: 1.5rem;
+    color: var(--dark-bg); 
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.starsContainer {
+    display: flex;
+    gap: 8px;
+    justify-content: center; 
+    margin-bottom: 0.5rem;
+}
+
+.star {
+    font-size: 2.2rem;
+    cursor: pointer;
+    color: #e0e0e0; 
+    transition: transform 0.2s, color 0.2s;
+}
+
+.star:hover {
+    transform: scale(1.2);
+}
+
+.starActive {
+    color: var(--hg-color); 
+}
+
+.textarea {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 120px;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: white;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.textarea:focus {
+    border-color: var(--btn); 
+    box-shadow: 0 0 0 3px rgba(143, 159, 138, 0.1);
+}
+
+.error {
+    color: #d32f2f;
+    font-size: 0.9rem;
+    background-color: #ffebee;
+    padding: 0.5rem;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.successBox {
+    background-color: #f1f8e9;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    color: #33691e;
+    margin-top: 3rem;
+}
+
+.submitBtn {
+    background-color: var(--btn); 
+    color: var(--bg);            
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 50px;       
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: center; 
+    width: 100%;
+    max-width: 300px;
+}
+
+.submitBtn:hover:not(:disabled) {
+    background-color: var(--dark-bg); 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
