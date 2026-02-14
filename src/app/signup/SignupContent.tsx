@@ -27,10 +27,11 @@ export default function SignupContent() {
             type="text"
             name="name"
             autoComplete="name"
+            id='name'
             required
             defaultValue={state?.values?.name}
           />
-          {state?.errors?.name && <p className={styles.errorMessage}>{state.errors.name}</p>}
+          {/* {state?.errors?.name && <p className={styles.errorMessage}>{state.errors.name}</p>} */}
         </div>
         <div className={styles.field}>
           <label htmlFor="email">Email:</label>
@@ -38,20 +39,23 @@ export default function SignupContent() {
             type="email"
             name="email"
             autoComplete="email"
+            id='email'
             required
             defaultValue={state?.values?.email}
 
           />
-          {state?.errors?.email && <p className={styles.errorMessage}>{state.errors.email}</p>}
+          {/* {state?.errors?.email && <p className={styles.errorMessage}>{state.errors.email}</p>} */}
         </div>
         <div className={styles.field}>
           <label htmlFor="password">Password:</label>
           <input
             type="password"
             name="password"
+            id='password'
             required
             minLength={8}
           />
+        {/*@ts-ignore */}
         {state?.errors?.password && (
           <div>
             <ul>

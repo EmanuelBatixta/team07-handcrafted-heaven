@@ -30,6 +30,7 @@ export default function LoginContent() {
             type="email"
             name="email"
             autoComplete="email"
+            id='email'
             required
           />
         </div>
@@ -39,6 +40,7 @@ export default function LoginContent() {
           <input
             type="password"
             name="password"
+            id='password'
             required
             minLength={8}
           />
@@ -53,7 +55,7 @@ export default function LoginContent() {
         <button
           type="submit"
           className={`${poppins.className} ${styles.complete}`}
-          disabled={pending}
+          aria-disabled={pending}
         >
           Login
         </button>
