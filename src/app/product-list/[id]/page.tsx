@@ -1,4 +1,5 @@
 import { fetchProduct } from '../../lib/products';
+import { fetchProductRating } from "../../lib/products";
 import Image from 'next/image';
 import styles from '../product.module.css';
 import Link from 'next/link';
@@ -18,8 +19,9 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   }
 
   const product = await fetchProduct(id);
+  const Rating = await fetchProductRating(id);
 
-  if (product === null) {
+  if (product === null || Rating === null) {
     return (
       <div>
         <p>No data available.</p>
@@ -50,6 +52,10 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
           <p className={styles.productPrice}>
           Price: ${product.price}
+          </p>
+
+          <p className={styles.productRating}>
+          Rating: {"⭐".repeat(Rating) + "☆".repeat(5 - Rating)}
           </p>
         </div>
         <div className={styles.right}>
