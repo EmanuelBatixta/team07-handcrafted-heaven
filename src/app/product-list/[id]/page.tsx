@@ -3,12 +3,16 @@ import { fetchProductRating } from "../../lib/products";
 import Image from 'next/image';
 import styles from '../product.module.css';
 import Link from 'next/link';
+// 1. AGREGAMOS ESTE IMPORT (Ajusta la ruta si es necesario, usa alias @ de preferencia)
+import ReviewForm from '@/components/ReviewForm'; 
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
   console.log('ACTIVE PRODUCT PAGE PARAMS:', resolvedParams);
   
   const { id } = await params;
+  // Convertimos el ID a número para pasárselo a tu componente
+  const productIdInt = parseInt(id);
 
   if (!id) {
     return (
@@ -72,6 +76,14 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           </p>
         </div>
       </div>
+
+      {/* --- 2. AQUÍ INYECTAMOS TU PARTE SIN TOCAR LO DE ARRIBA --- */}
+      {/* Línea divisoria sutil */}
+      <hr style={{ margin: '4rem 0 2rem 0', border: '0', borderTop: '1px solid #ddd' }} />
+      
+      {/* Tu componente */}
+      <ReviewForm productId={productIdInt} />
+      
     </div>
   );
 }
