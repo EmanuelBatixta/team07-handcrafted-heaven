@@ -31,7 +31,8 @@ export default function SignupContent() {
             required
             defaultValue={state?.values?.name}
           />
-          {/* {state?.errors?.name && <p className={styles.errorMessage}>{state.errors.name}</p>} */}
+          {/*@ts-ignore */}
+          {state?.errors?.name && <p className={styles.errorMessage}>{state.errors.name}</p>}
         </div>
         <div className={styles.field}>
           <label htmlFor="email">Email:</label>
@@ -44,7 +45,7 @@ export default function SignupContent() {
             defaultValue={state?.values?.email}
 
           />
-          {/* {state?.errors?.email && <p className={styles.errorMessage}>{state.errors.email}</p>} */}
+           {state?.errors?.email && <p className={styles.errorMessage}>{state.errors.email}</p>}
         </div>
         <div className={styles.field}>
           <label htmlFor="password">Password:</label>

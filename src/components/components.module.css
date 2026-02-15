@@ -115,6 +115,13 @@ button:hover {
     color: var(--hg-color); 
 }
 
+.userName{
+    color: var(--dark-bg);
+    font-size: 1.3rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+}
+
 .actualPage{
     color: var(--hg-color);
     text-decoration: underline;

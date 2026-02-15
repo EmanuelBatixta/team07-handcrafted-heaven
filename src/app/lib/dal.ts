@@ -7,14 +7,20 @@ import { cache } from 'react'
 import prisma from '../db/db'
  
 export const verifySession = cache(async () => {
-  const cookie = (await cookies()).get('session')?.value
-  const session = await decrypt(cookie)
+  try {
+    const cookie = (await cookies()).get('session')?.value
+    const session = await decrypt(cookie)
+    
+    if (!session?.sub) {
+      return { isAuth: false, user: null}
+      //redirect('/login')
+    }
   
-  if (!session?.sub) {
-    redirect('/login')
-  }
+    const user = await prisma.user.findUnique({where: { public_id: session?.sub }, omit: {password: true}})
+   
+    return { isAuth: true, user: user }
 
-  const user = await prisma.user.findUnique({where: { public_id: session?.sub }, omit: {password: true}})
- 
-  return { isAuth: true, user: user }
+  } catch (error) {
+    console.error('Error verfying session: ', error)
+  }
 })

@@ -12,7 +12,7 @@ export const authConfig = {
         if (isLoggedIn) return true;
         return false; 
       } else if (isLoggedIn) {
-        return Response.redirect(new URL('/product-list', nextUrl));
+        return Response.redirect(new URL('/login', nextUrl));
       }
       return true;
     },

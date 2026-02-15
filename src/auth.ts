@@ -67,6 +67,6 @@ export async function signup(state: FormState, formData: FormData) {
 
 export async function logout() {
   await deleteSession()
-  await signOut()
+  await signOut
   redirect('/login')
 }
