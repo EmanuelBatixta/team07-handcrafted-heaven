@@ -25,10 +25,19 @@ export default function ProductFilter({
     new Set(products.map(p => p.category))
   );
 
-  const filteredProducts =
-    selectedCategory === "all"
-      ? products
-      : products.filter(p => p.category === selectedCategory);
+  const filteredAndSortedProducts = [...products]
+  .filter(p =>
+    selectedCategory === "all" ||
+    selectedCategory === "low" ||
+    selectedCategory === "high"
+      ? true
+      : p.category === selectedCategory
+  )
+  .sort((a, b) => {
+    if (selectedCategory === "low") return a.price - b.price;
+    if (selectedCategory === "high") return b.price - a.price;
+    return 0;
+  });
 
   if (!products || products.length === 0) {
     return (
@@ -86,7 +95,9 @@ export default function ProductFilter({
                             setOpen(false);
                         }}
                     >
-                        <option value="all">All Categories</option>
+                        <option value="all">All Prices</option>
+                        <option value="low">Price: Low to High</option>
+                        <option value="high">Price: High to Low</option>
                         {categories.map((category) => (
                         <option key={category} value={category}>
                             {category}
@@ -98,7 +109,7 @@ export default function ProductFilter({
         </div>
         <div className={styles.content}>
             <div className={styles.container}>
-                {filteredProducts.map((product) => (
+                {filteredAndSortedProducts.map((product) => (
                 <Link key={product.id} className={styles.product} href={`/product-list/${product.id}`}>
                     <Image
                     className={styles.cardImage}
