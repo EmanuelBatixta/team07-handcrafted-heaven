@@ -38,3 +38,24 @@ export async function fetchProduct(
   }
 }
 
+export async function fetchProductRating(
+  id: string
+): Promise<number> {
+  if (!id) {
+    return 0;
+  }
+
+  try {
+    const rows = await sql`
+      SELECT AVG(stars)::int AS average
+      FROM "Rating"
+      WHERE "productId" = ${id}
+    `;
+
+    return rows[0]?.average ?? 0;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch product reviews.');
+  }
+}
+
