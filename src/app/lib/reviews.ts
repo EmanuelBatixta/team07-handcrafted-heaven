@@ -3,11 +3,7 @@
 import { z } from 'zod';
 import prisma from '../db/db'; 
 import { revalidatePath } from 'next/cache';
-// import { auth } from '@/auth'; 
-import postgres from 'postgres';
-import { Review } from './definitions';
-
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+import { auth } from '@/auth'; // Now active!
 
 const ReviewSchema = z.object({
   stars: z.coerce.number().min(1).max(5),
@@ -17,15 +13,23 @@ const ReviewSchema = z.object({
 
 export async function createReview(prevState: any, formData: FormData) {
   try {
-    // Get the first available user (Bypass Mode)
-    const user = await prisma.user.findFirst();
+    // 1. Check if the user is authenticated
+    const session = await auth();
 
-    if (!user) {
-        return { message: 'Error: No users found in the database (please create one in Prisma Studio).' };
+    if (!session || !session.user?.email) {
+        return { message: 'You must be logged in to leave a review.' };
     }
 
-    console.log("🛠️ BYPASS ACTIVE: Assigning review to user:", user.name);
+    // 2. Find the logged-in user in the database
+    const user = await prisma.user.findUnique({
+        where: { email: session.user.email }
+    });
 
+    if (!user) {
+        return { message: 'Error: User account not found.' };
+    }
+
+    // 3. Validate form data
     const validatedFields = ReviewSchema.safeParse({
       stars: formData.get('stars'),
       comment: formData.get('comment'),
@@ -38,6 +42,7 @@ export async function createReview(prevState: any, formData: FormData) {
 
     const { stars, comment, productId } = validatedFields.data;
 
+    // 4. Create the review using the real user's public_id
     await prisma.review.create({
       data: {
         stars: stars,
@@ -53,27 +58,5 @@ export async function createReview(prevState: any, formData: FormData) {
   } catch (error) {
     console.error('Database Error:', error);
     return { message: 'Failed to connect to the database.' };
-  }
-}
-
-export async function fetchReview(
-  id: string
-): Promise<Review[]> {
-    if (!id) {
-      return [];
-    }
-
-    try {
-      const rows = await sql<Review[]>`
-        SELECT *
-        FROM "Review"
-        WHERE "productId" = ${id}
-        LIMIT 3
-      `;
-
-    return rows;
-  } catch (err) {
-    console.error('Database Error:', err);
-    throw new Error('Failed to fetch review.');
   }
 }
