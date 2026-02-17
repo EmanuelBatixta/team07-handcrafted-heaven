@@ -16,6 +16,7 @@ export type Review = {
   id: string;
   productId: string;
   userPublic_id: string;
+  userName?: string;
 }
 
 export const userSchema = z.object({

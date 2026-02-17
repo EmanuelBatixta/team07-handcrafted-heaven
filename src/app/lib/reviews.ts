@@ -68,9 +68,10 @@ export async function fetchReview(id: string): Promise<Review[]> {
 
     try {
       const rows = await sql<Review[]>`
-        SELECT *
+        SELECT "Review".*, "User".name as "userName"
         FROM "Review"
-        WHERE "productId" = ${id}
+        JOIN "User" ON "Review"."userPublic_id" = "User"."public_id"
+        WHERE "Review"."productId" = ${id}
         LIMIT 3
       `;
 
