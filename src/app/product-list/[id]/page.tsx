@@ -74,7 +74,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         ) : (
           reviews.map((review) => (
             <div key={review.id} className={styles.review}>
-              <h3>{review.userPublic_id}</h3>
+              <h3>{review.userName || "Anonymous User"}</h3>
               <p>
                 {"⭐".repeat(review.stars) + "☆".repeat(5 - review.stars)}
               </p>
