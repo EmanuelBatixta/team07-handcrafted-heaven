@@ -50,7 +50,7 @@
 }
 
 .starActive {
-    color: var(--hg-color); 
+    color: yellow; 
 }
 
 .textarea {
@@ -91,7 +91,7 @@
 }
 
 .submitBtn {
-    background-color: var(--btn); 
+    background-color: slategray; 
     color: var(--bg);            
     padding: 0.8rem 2rem;
     border: none;
@@ -106,7 +106,7 @@
 }
 
 .submitBtn:hover:not(:disabled) {
-    background-color: var(--dark-bg); 
+    background-color: darkslategray; 
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
