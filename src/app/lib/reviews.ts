@@ -3,7 +3,7 @@
 import { z } from 'zod';
 import prisma from '../db/db'; 
 import { revalidatePath } from 'next/cache';
-// import { auth } from '@/auth'; 
+import { auth } from '@/auth'; 
 import postgres from 'postgres';
 import { Review } from './definitions';
 
@@ -17,14 +17,19 @@ const ReviewSchema = z.object({
 
 export async function createReview(prevState: any, formData: FormData) {
   try {
-    // Get the first available user (Bypass Mode)
-    const user = await prisma.user.findFirst();
+    const session = await auth();
 
-    if (!user) {
-        return { message: 'Error: No users found in the database (please create one in Prisma Studio).' };
+    if (!session || !session.user?.email) {
+        return { message: 'You must be logged in to leave a review.' };
     }
 
-    console.log("🛠️ BYPASS ACTIVE: Assigning review to user:", user.name);
+    const user = await prisma.user.findUnique({
+        where: { email: session.user.email }
+    });
+
+    if (!user) {
+        return { message: 'Error: User account not found.' };
+    }
 
     const validatedFields = ReviewSchema.safeParse({
       stars: formData.get('stars'),
@@ -56,9 +61,7 @@ export async function createReview(prevState: any, formData: FormData) {
   }
 }
 
-export async function fetchReview(
-  id: string
-): Promise<Review[]> {
+export async function fetchReview(id: string): Promise<Review[]> {
     if (!id) {
       return [];
     }

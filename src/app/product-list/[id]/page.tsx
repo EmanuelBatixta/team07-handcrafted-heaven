@@ -1,18 +1,15 @@
-import { fetchProduct } from '../../lib/products';
-import { fetchProductRating } from "../../lib/products";
+import { fetchProduct, fetchProductRating } from '../../lib/products';
 import Image from 'next/image';
 import styles from '../product.module.css';
 import Link from 'next/link';
-// 1. AGREGAMOS ESTE IMPORT (Ajusta la ruta si es necesario, usa alias @ de preferencia)
+import { auth } from '@/auth'; 
 import ReviewForm from '@/components/ReviewForm'; 
 import { fetchReview } from '../../lib/reviews';
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
-  console.log('ACTIVE PRODUCT PAGE PARAMS:', resolvedParams);
   
   const { id } = await params;
-  // Convertimos el ID a número para pasárselo a tu componente
   const productIdInt = parseInt(id);
 
   if (!id) {
@@ -26,6 +23,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   const product = await fetchProduct(id);
   const Rating = await fetchProductRating(id);
   const reviews = await fetchReview(id);
+  const session = await auth();
 
   if (product === null) {
     return (
@@ -33,9 +31,6 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         <p>No data available.</p>
         <p>Example placeholder data below.</p>
         <div className={styles.container}>
-            {/* Example products */}
-            {/* Shows up when the database returns nothing. */}
-
           <div className={styles.product}>
               <Image src="/placeholder.jpg" alt="placeholder" width={200} height={200}></Image>
               <h2 className={styles.productTitle}>Product 1</h2>
@@ -52,36 +47,28 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
       <Link href="/product-list" className={styles.back}>⬅️ Back to Product List</Link>
       <div className={styles.productSingle}>
         <div className={styles.left}>
-          <h2 className={styles.productTitle}>
-          {product.name}
-          </h2>
-
-          <p className={styles.productPrice}>
-          Price: ${product.price}
-          </p>
-
+          <h2 className={styles.productTitle}>{product.name}</h2>
+          <p className={styles.productPrice}>Price: ${product.price}</p>
           <p className={styles.productRating}>
-          Rating: {"⭐".repeat(Rating) + "☆".repeat(5 - Rating)}
+             {"⭐".repeat(Rating) + "☆".repeat(5 - Rating)}
           </p>
         </div>
         <div className={styles.right}>
           <Image
-          className={styles.productImage}
-          src={product.image_link || "/placeholder.jpg"}
-          alt={product.description}
-          width={400}
-          height={300}
+            className={styles.productImage}
+            src={product.image_link || "/placeholder.jpg"}
+            alt={product.description}
+            width={400}
+            height={300}
           />
-
-          <p className={styles.productDescription}>
-          {product.description}
-          </p>
+          <p className={styles.productDescription}>{product.description}</p>
         </div>
       </div>
 
       <hr style={{ margin: '4rem 0 2rem 0', border: '0', borderTop: '1px solid #ddd' }} />
 
       <div className={styles.reviews}>
+        <h3 style={{ marginBottom: '1rem' }}>Customer Reviews</h3>
         {reviews.length === 0 ? (
           <p>No reviews yet.</p>
         ) : (
@@ -97,12 +84,11 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         )}
       </div>
 
-      {/* --- 2. AQUÍ INYECTAMOS TU PARTE SIN TOCAR LO DE ARRIBA --- */}
-      {/* Línea divisoria sutil */}
       <hr style={{ margin: '4rem 0 2rem 0', border: '0', borderTop: '1px solid #ddd' }} />
       
-      {/* Tu componente */}
-      <ReviewForm productId={productIdInt} />
+      <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <ReviewForm productId={productIdInt} isLoggedIn={!!session?.user} />
+      </div>
       
     </div>
   );
