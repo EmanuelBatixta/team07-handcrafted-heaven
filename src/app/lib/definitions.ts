@@ -10,6 +10,14 @@ export type Product = {
   name: string;
 };
 
+export type Review = {
+  stars: number;
+  comment: string;
+  id: string;
+  productId: string;
+  userPublic_id: string;
+}
+
 export const userSchema = z.object({
     name: z.string().min(2,{error: 'Name must be least 2 characters long'}).trim(),
     email: z.email({error: 'Please, enter a valid email'}).trim(),

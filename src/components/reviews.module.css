@@ -12,7 +12,7 @@
 
 .title {
     font-size: 1.5rem;
-    color: var(--dark-bg); 
+    color: darkslategray; 
     margin-bottom: 0.5rem;
     font-weight: 700;
     text-align: center;
