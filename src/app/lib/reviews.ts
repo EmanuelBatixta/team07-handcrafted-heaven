@@ -4,6 +4,10 @@ import { z } from 'zod';
 import prisma from '../db/db'; 
 import { revalidatePath } from 'next/cache';
 // import { auth } from '@/auth'; 
+import postgres from 'postgres';
+import { Review } from './definitions';
+
+const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
 const ReviewSchema = z.object({
   stars: z.coerce.number().min(1).max(5),
@@ -49,5 +53,27 @@ export async function createReview(prevState: any, formData: FormData) {
   } catch (error) {
     console.error('Database Error:', error);
     return { message: 'Failed to connect to the database.' };
+  }
+}
+
+export async function fetchReview(
+  id: string
+): Promise<Review[]> {
+    if (!id) {
+      return [];
+    }
+
+    try {
+      const rows = await sql<Review[]>`
+        SELECT *
+        FROM "Review"
+        WHERE "productId" = ${id}
+        LIMIT 3
+      `;
+
+    return rows;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch review.');
   }
 }

@@ -18,7 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Handcrafted Heaven | Group 07</title>
+        <title>Handcrafted Haven | Group 07</title>
+        <meta name="description" content="Handcrafted Haven" />
       </head>
       <body className={poppins.className}>
         <Header/>

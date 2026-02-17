@@ -5,6 +5,7 @@ import styles from '../product.module.css';
 import Link from 'next/link';
 // 1. AGREGAMOS ESTE IMPORT (Ajusta la ruta si es necesario, usa alias @ de preferencia)
 import ReviewForm from '@/components/ReviewForm'; 
+import { fetchReview } from '../../lib/reviews';
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
@@ -24,8 +25,9 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
   const product = await fetchProduct(id);
   const Rating = await fetchProductRating(id);
+  const reviews = await fetchReview(id);
 
-  if (product === null || Rating === null) {
+  if (product === null) {
     return (
       <div>
         <p>No data available.</p>
@@ -75,6 +77,24 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           {product.description}
           </p>
         </div>
+      </div>
+
+      <hr style={{ margin: '4rem 0 2rem 0', border: '0', borderTop: '1px solid #ddd' }} />
+
+      <div className={styles.reviews}>
+        {reviews.length === 0 ? (
+          <p>No reviews yet.</p>
+        ) : (
+          reviews.map((review) => (
+            <div key={review.id} className={styles.review}>
+              <h3>{review.userPublic_id}</h3>
+              <p>
+                {"⭐".repeat(review.stars) + "☆".repeat(5 - review.stars)}
+              </p>
+              <p>{review.comment}</p>
+            </div>
+          ))
+        )}
       </div>
 
       {/* --- 2. AQUÍ INYECTAMOS TU PARTE SIN TOCAR LO DE ARRIBA --- */}

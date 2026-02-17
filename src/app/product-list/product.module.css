@@ -43,6 +43,11 @@
     font-size: x-large;
 }
 
+.productDescription {
+    background-color: white;
+    color: black;
+}
+
 .content {
     margin: 15px;
 }
@@ -109,6 +114,8 @@
 
 .productPrice {
     color: green;
+    background-color: white;
+    border-radius: 3px;
 }
 
 .left {
