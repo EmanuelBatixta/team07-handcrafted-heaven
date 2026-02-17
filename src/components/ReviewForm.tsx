@@ -4,13 +4,35 @@ import { useActionState, useState } from 'react';
 import { createReview } from '@/app/lib/reviews'; 
 import styles from './reviews.module.css'; 
 import { Poppins } from 'next/font/google';
+import Link from 'next/link';
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600"] });
 
-export default function ReviewForm({ productId }: { productId: number }) {
+export default function ReviewForm({ productId, isLoggedIn }: { productId: number, isLoggedIn: boolean }) {
   const [state, formAction, isPending] = useActionState(createReview, null);
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+
+  if (!isLoggedIn) {
+    return (
+        <div className={`${styles.container} ${poppins.className}`} style={{textAlign: 'center', padding: '3rem 1rem'}}>
+            <h3 className={styles.title}>Want to review this product?</h3>
+            <p className={styles.subtitle}>Please log in to share your experience.</p>
+            <Link 
+                href="/login" 
+                className={styles.submitBtn} 
+                style={{ 
+                    display: 'inline-block', 
+                    textDecoration: 'none', 
+                    maxWidth: '200px',
+                    lineHeight: '1.5'
+                }}
+            >
+                Log In
+            </Link>
+        </div>
+    );
+  }
 
   if (state?.message === 'Success') {
     return (
