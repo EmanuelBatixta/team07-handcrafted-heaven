@@ -1,59 +1,27 @@
-import Image from "next/image"
-import Link from 'next/link'
-import styles from './components.module.css'
-import { Poppins } from 'next/font/google';
-import { logout } from "@/auth";
-import { verifySession } from "@/app/lib/dal";
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from './components.module.css';
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-});
-
-export default async function Header() {
-    const session = await verifySession()
-    return (
-        <header className={styles.header}>
-            <div className={styles.logo}>
-                <Image 
-                    src="/handcraftedlogo.webp" 
-                    alt="logo" 
-                    width={140} 
-                    height={140}
-                    priority 
-                />    
-                <h1 className={poppins.className}>Group 07</h1>
-            </div>
-            <div className={styles.buttons}>
-                {
-                   session?.isAuth !== false ? (
-                        <>
-                            <p className={styles.userName}>Hello, {session?.user?.name}</p>
-                            <form className={styles.signout}
-                                action={logout}
-                            >
-                                
-                                <button
-                                type="submit"
-                                className={`${poppins.className} ${styles.fullfill}`}
-                                >
-                                    LogOut
-                                </button>
-                            </form>
-                        </>
-                    ) : (
-
-                        <>
-                            <Link href="/login">
-                            <button className={`${styles.fullfill} ${poppins.className}`} >Login</button>
-                            </Link>
-                            <Link href="/signup">
-                                <button className={`${styles.outline} ${poppins.className}`}>Signup</button>
-                            </Link>
-                        </>
-                    )
-                }
-            </div>
-        </header>
-    )
+export default function Header() {
+  return (
+    <header className={styles.header}>
+      {/* Logo on the left */}
+      <Link href="/" className={styles.logo}>
+        <Image 
+          src="/handcrafted-haven-logo.png" 
+          alt="Handcrafted Haven Logo" 
+          width={100} 
+          height={100} 
+          style={{ borderRadius: '8px' }}
+        />
+        Handcrafted<span className={styles.logoHighlight}>Haven</span>
+      </Link>
+      
+      {/* Action buttons on the right */}
+      <div className={styles.headerActions}>
+        <Link href="/login" className={styles.loginBtn}>Login</Link>
+        <Link href="/signup" className={styles.signupBtn}>Sign Up</Link>
+      </div>
+    </header>
+  );
 }

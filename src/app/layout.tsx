@@ -1,8 +1,15 @@
+import { Poppins } from 'next/font/google';
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Nav from "@/components/nav";
-import styles from './app.module.css'
-   
+import ThemeToggle from "@/components/ThemeToggle"; 
+import "./globals.css"; 
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -11,13 +18,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Handcrafted Heaven | Group07</title>
+        <title>Handcrafted Heaven | Group 07</title>
       </head>
-      <body>
-      <Header/>
-      <Nav/>
-        {children}
-      <Footer/>
+      <body className={poppins.className}>
+        <Header/>
+        <Nav/>
+        <main>
+          {children}
+        </main>
+        <ThemeToggle /> { }
+        <Footer/>
       </body>
     </html>
   );

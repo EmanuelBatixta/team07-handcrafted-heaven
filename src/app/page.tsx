@@ -1,25 +1,49 @@
 import Image from "next/image"
 import Link from 'next/link'
 import styles from './app.module.css'
-import { Poppins } from 'next/font/google';
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400"],
-});
 
 export default function Home() {
   return (
     <div className={styles.home}>
-      <h1 className={poppins.className}>Home</h1>
+      {/* Título escondido visualmente, mantido por SEO */}
+      <h1 className={styles.title}>Home</h1>
 
       <div className={styles.container}>
-        <div className={styles.row}>
-          <h2>Welcome to Handcrafted Haven</h2>
-          <p>Handcrafted Haven is a platform for artisans and crafters to showcase their unique handcrafted items and sell them to potential customers.</p>
-          <p>View our <Link href="/product-list">products</Link> and place an order today!</p>
+        
+        {/* Coluna de Texto Principal */}
+        <div className={styles.textContent}>
+          <span className={styles.badge}>100% Handmade</span>
+          
+          <h2>
+            Welcome to <br/>
+            <span className={styles.highlight}>Handcrafted Haven</span>
+          </h2>
+          
+          <p>
+            A vibrant platform for artisans and crafters to showcase 
+            their unique, passion-crafted items and share them with the world.
+          </p>
+          <p>
+            Find beautiful, one-of-a-kind treasures that bring soul to your everyday life.
+          </p>
+          
+          <Link href="/product-list" className={styles.ctaButton}>
+            Explore Collection <span className={styles.arrow}>→</span>
+          </Link>
         </div>
-          <Image className={`${styles.row} ${styles.picture}`} src="/hand-crafted-image.jpg" alt="logo" width={612} height={408}></Image>
+        
+        {/* Coluna da Imagem */}
+        <div className={styles.imageWrapper}>
+          <Image 
+            className={styles.picture} 
+            src="/hand-crafted-image.jpg" 
+            alt="Handcrafted items showcase" 
+            width={612} 
+            height={408}
+            priority
+          />
+        </div>
+
       </div>
     </div>
   );

@@ -1,64 +1,129 @@
-
-.container {
-  max-width: 800px;
+.pageWrapper {
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
-  background-color: var(--background);
-  color: var(--foreground);
+  padding: 40px 20px 80px;
+  animation: fadeUp 0.8s ease-out forwards;
 }
 
-.header {
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= HERO SECTION ================= */
+.hero {
   text-align: center;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--foreground);
+  margin-bottom: 60px;
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+  font-size: 3rem;
+  color: var(--color-sage);
+  margin-bottom: 15px;
+  font-weight: 700;
 }
 
 .subtitle {
   font-size: 1.2rem;
-  opacity: 0.9;
+  color: var(--foreground);
+  opacity: 0.8;
+  max-width: 600px;
+  margin: 0 auto;
   line-height: 1.6;
 }
 
+/* ================= CARDS ================= */
 .section {
-  margin-bottom: 3rem;
+  background-color: var(--card-bg);
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(143, 159, 138, 0.15);
+  margin-bottom: 40px;
+  transition: background-color 0.4s ease;
 }
 
 .sectionTitle {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  border-left: 4px solid var(--foreground); 
-  padding-left: 1rem;
+  color: var(--color-tan);
+  font-size: 2.2rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .text {
+  font-size: 1.15rem;
   line-height: 1.8;
-  margin-bottom: 1rem;
+  color: var(--foreground);
+  margin-bottom: 15px;
+  opacity: 0.9;
+}
+
+/* ================= PICTURES ================= */
+.imageSection {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.aboutImage {
+  width: 100%;
+  max-width: 700px; 
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  object-fit: cover;
+  border: 1px solid rgba(143, 159, 138, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.aboutImage:hover {
+  transform: scale(1.01); 
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ================= GRADE "WHAT WE OFFER" ================= */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.featureCard {
+  background-color: var(--background); 
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid rgba(143, 159, 138, 0.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  transition: all 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(143, 159, 138, 0.15);
+  border-color: var(--color-sage);
+}
+
+.featureTitle {
+  color: var(--color-sage);
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.featureText {
+  color: var(--foreground);
   font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.85;
 }
 
-.list {
-  list-style: none;
-  padding: 0;
-  margin-top: 1rem;
-}
-
-.listItem {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border: 1px solid var(--foreground);
-  border-radius: 8px;
-}
-
-
-@media (max-width: 600px) {
-  .title {
-    font-size: 2rem;
-  }
+@media (max-width: 768px) {
+  .title { font-size: 2.5rem; }
+  .section { padding: 30px 20px; }
+  .sectionTitle { font-size: 1.8rem; }
 }

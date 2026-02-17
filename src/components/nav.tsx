@@ -1,27 +1,47 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import styles from './components.module.css'
-import clsx from 'clsx'
-import { usePathname } from 'next/navigation'
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import styles from './components.module.css';
 
-export default function Nav(){
-    const pathname = usePathname()
-    const links = [{ href: '/', name: 'Home'}, {href: '/product-list', name: 'Products'},{href: '/about-us', name: 'About Us'}]
+export default function Nav() {
+  const pathname = usePathname();
 
-    return( 
-        <nav className={styles.nav}>
-            {links.map((link)=>{
-                return (
-                    <Link href={link.href} key={link.name} className={clsx(
-                    {
-                        [styles.actualPage] : pathname === link.href,
+  return (
+    <div className={styles.navWrapper}>
+      <nav className={styles.nav}>
+        
+        { }
+        <div className={styles.mainNavLinks}>
+          <Link 
+            href="/" 
+            className={`${styles.navLink} ${pathname === '/' ? styles.activeLink : ''}`}
+          >
+            Home
+          </Link>
+          
+          <Link 
+            href="/product-list" 
+            className={`${styles.navLink} ${pathname?.startsWith('/product-list') ? styles.activeLink : ''}`}
+          >
+            Products
+          </Link>
+          
+          <Link 
+            href="/about-us" 
+            className={`${styles.navLink} ${pathname === '/about-us' ? styles.activeLink : ''}`}
+          >
+            About Us
+          </Link>
+        </div>
 
-                    },
-                )}
-            >{link.name}</Link>
-                )
-            })}
-        </nav>
-    )
+        {/* Links de Login/Signup (Visíveis APENAS no Celular) */}
+        <div className={styles.mobileAuthLinks}>
+          <Link href="/login" className={styles.loginBtn}>Login</Link>
+          <Link href="/signup" className={styles.signupBtn}>Sign Up</Link>
+        </div>
+
+      </nav>
+    </div>
+  );
 }

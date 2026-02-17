@@ -1,39 +1,106 @@
+
 .form {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 20px;
     align-items: center;
-    margin-top: 1rem;
+    background-color: var(--card-bg); 
+    max-width: 450px;
+    margin: 60px auto; 
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(143, 159, 138, 0.2); 
+    transition: background-color 0.4s ease;
+}
 
-    & h1{
-        margin: 0 auto;
-        text-align: center;
-    }
+.form h1 {
+    margin: 0 0 10px 0;
+    text-align: center;
+    color: var(--color-sage);
+    font-size: 2.2rem;
+    font-weight: 600;
+    width: 100%;
 }
 
 .field {
     display: flex;
     flex-direction: column;
-    margin: 10px;
-    width: 35%;
+    margin: 0; 
+    width: 100%; 
+    gap: 8px; 
+}
+
+.field label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--foreground);
+}
+
+.form input:not([type="hidden"]) {
+    width: 100%;
+    box-sizing: border-box; 
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(143, 159, 138, 0.3);
+    background-color: var(--background);
+    color: var(--foreground);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form input:focus {
+    border-color: var(--color-sage);
+    box-shadow: 0 0 0 4px rgba(143, 159, 138, 0.15); 
 }
 
 .complete {
-    background-color: #C89B6A;
-    width: 35%;
-    padding: 8px;
+    background-color: var(--color-sage); 
+    color: var(--color-light);
+    width: 100%;
+    padding: 14px;
     border-radius: 10px;
-    font-size: larger;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
 }
 
-.form input{
-    padding: .5rem;
-    border: 1px solid #2B2B2B;
-    border-radius: .5rem;
+.complete:hover:not(:disabled) {
+    background-color: var(--color-tan); 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 15px rgba(200, 155, 106, 0.3);
+    color: white;
 }
 
-.errorMessage{
-    margin: 0;
+.complete:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.errorMessage {
+    margin: 4px 0 0 0;
     padding: 0;
-    color: rgb(128, 0, 0);
+    color: #d32f2f; 
+    font-size: 0.85rem;
+    font-weight: 500;
+    width: 100%;
+    text-align: left;
+}
+
+.field ul {
+    margin: 5px 0 0 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+@media (max-width: 768px) {
+    .form {
+        width: 90%;
+        padding: 30px 20px;
+        margin: 40px auto;
+    }
 }

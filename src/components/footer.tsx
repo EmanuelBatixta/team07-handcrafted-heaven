@@ -1,36 +1,30 @@
-import Image from "next/image"
-import Link from 'next/link'
-import styles from './components.module.css'
+import styles from './components.module.css';
 
 export default function Footer() {
-    return (
-        <>
-            <div className={styles.footerContainer}>
-                <nav className={styles.footerNav} >
-                    <Link href="/">Home</Link>
-                    <Link href="/product-list">Products</Link>
-                    <Link href="/about-us">About Us</Link>
-                </nav >
+  const currentYear = new Date().getFullYear();
 
-
-                <div className={styles.footerTitle}>
-                    <h1 className={styles.footer}>Handcrafted Heaven</h1>
-                    <Image className="logoFooter" src="/handcraftedlogo.webp" alt="logoFooter" width={100} height={100}></Image>
-                </div>
-
-                <div className={styles.studentsList}>
-                    <p>Members:</p>
-                    <ul>
-                        <li>Alex C.</li>
-                        <li>Emanuel Batista</li>
-                        <li>John Carlo D.</li>
-                        <li>Tyson Pace</li>
-                        <li>John Carlo D.</li>
-                    </ul>
-                </div>
-
-                <span className={styles.copyright}>©{new Date().getFullYear()} All rigths reserved</span>
-            </div>
-        </>
-    )
+  return (
+    <footer className={styles.footer}>
+      <div className={styles.footerContent}>
+        <h3 className={styles.footerTitle}>Handcrafted Haven</h3>
+        <p className={styles.footerText}>
+          Empowering artisans and bringing unique, passion-crafted items to your everyday life.</p>
+        
+        {/* list of team members */}
+        <ul className={styles.teamMembers}>
+          <li className={styles.teamMember}>Tyson Pace</li>
+          <li className={styles.teamMember}>Emanuel Oliveira</li>
+          <li className={styles.teamMember}>Jonathas Oliveira</li>
+          <li className={styles.teamMember}>Ibraim Vergara</li>
+          <li className={styles.teamMember}>Alex Condori</li>
+        </ul>
+      </div>
+      
+      <div className={styles.footerDivider}></div>
+      
+      <p className={styles.footerCopy}>
+        &copy; {currentYear} Group 07 | WDD 430 Full Stack Development. All rights reserved.
+      </p>
+    </footer>
+  );
 }
