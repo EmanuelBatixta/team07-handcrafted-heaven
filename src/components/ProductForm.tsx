@@ -3,6 +3,7 @@
 import { useActionState } from 'react';
 import { CreateProduct } from '../app/lib/products';
 import styles from './components.module.css';
+import styles1 from './reviews.module.css';
 
 export default function ProductForm() {
   const [state, formAction] = useActionState(CreateProduct, { message: '' });
@@ -35,7 +36,7 @@ export default function ProductForm() {
         <input name="image_link" type="url" required />
       </div>
 
-      <button type="submit">Create Product</button>
+      <button type="submit" className={styles1.submitBtn}>Create Product</button>
 
       {state?.message && <p>{state.message}</p>}
     </form>
