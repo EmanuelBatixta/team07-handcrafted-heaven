@@ -286,3 +286,10 @@
     height: 45px;
   }
 }
+
+.form {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

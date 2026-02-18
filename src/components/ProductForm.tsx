@@ -2,12 +2,13 @@
 
 import { useActionState } from 'react';
 import { CreateProduct } from '../app/lib/products';
+import styles from './components.module.css';
 
 export default function ProductForm() {
   const [state, formAction] = useActionState(CreateProduct, { message: '' });
 
   return (
-    <form action={formAction} className="space-y-4">
+    <form action={formAction} className={styles.form}>
 
       <div>
         <label>Name</label>
