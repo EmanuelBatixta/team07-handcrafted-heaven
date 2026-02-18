@@ -7,7 +7,6 @@ import { z } from 'zod';
 import bcrypt from 'bcryptjs';
 import prisma from '@/app/db/db';
 import { FormState, userSchema } from './app/lib/definitions';
-import { createSession, deleteSession } from './app/lib/session';
 import { redirect } from 'next/navigation';
  
 export const { auth, signIn, signOut } = NextAuth({
@@ -25,7 +24,7 @@ export const { auth, signIn, signOut } = NextAuth({
           if (!user) return null;
           const passwordsMatch = await bcrypt.compare(password, user.password)
           if (passwordsMatch) {
-            await createSession(user.public_id)
+            //await createSession(user.public_id)
              return user;
           }
         }
@@ -58,15 +57,10 @@ export async function signup(state: FormState, formData: FormData) {
 
     if(!user) { return {message: 'An error occurred while creating your account.'}}
 
-    await createSession(user.public_id)
+    //await createSession(user.public_id)
     redirect('/product-list')
   } catch(error) {
     return {message: 'An unexpected error ocurred. please try again later'}
   }
 }
 
-export async function logout() {
-  await deleteSession()
-  await signOut
-  redirect('/login')
-}
