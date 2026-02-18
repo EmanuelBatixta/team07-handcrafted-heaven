@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './components.module.css';
+import { verifySession } from '@/app/lib/dal';
+import { logout } from '@/auth';
 
-export default function Header() {
+export default async function Header() {
+  const session = await verifySession();
   return (
     <header className={styles.header}>
       {/* Logo on the left */}
@@ -19,8 +22,20 @@ export default function Header() {
       
       {/* Action buttons on the right */}
       <div className={styles.headerActions}>
-        <Link href="/login" className={styles.loginBtn}>Login</Link>
-        <Link href="/signup" className={styles.signupBtn}>Sign Up</Link>
+        {session?.isAuth ? (
+          <>
+            <p>Hello, {session.user?.name}</p>
+            <form action={logout}>
+              <button className={styles.logoutBtn}>Logout</button>
+            </form>
+          </>
+        ) : (
+          <>
+            <Link href="/login" className={styles.loginBtn}>Login</Link>
+            <Link href="/signup" className={styles.signupBtn}>Sign Up</Link>
+          </>
+        )
+       }
       </div>
     </header>
   );

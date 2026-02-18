@@ -45,7 +45,7 @@
   background-color: rgba(143, 159, 138, 0.05);
 }
 
-.signupBtn {
+.signupBtn, .logoutBtn {
   background-color: var(--color-sage);
   color: var(--color-light);
   font-weight: 600;
@@ -53,10 +53,12 @@
   padding: 8px 24px;
   border-radius: 8px;
   transition: all 0.3s ease;
+  border: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.signupBtn:hover {
+.signupBtn:hover,
+.logoutBtn:hover {
   background-color: var(--color-tan);
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(200, 155, 106, 0.3);

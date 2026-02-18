@@ -6,7 +6,6 @@ import Link from 'next/link';
 import styles from './product.module.css';
 import { Product } from '../lib/definitions';
 import { Poppins } from 'next/font/google';
-import { set } from 'zod';
 
 const poppins = Poppins({
   subsets: ["latin"],
