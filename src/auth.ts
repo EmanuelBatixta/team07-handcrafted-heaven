@@ -24,7 +24,6 @@ export const { auth, signIn, signOut } = NextAuth({
           if (!user) return null;
           const passwordsMatch = await bcrypt.compare(password, user.password)
           if (passwordsMatch) {
-            //await createSession(user.public_id)
              return user;
           }
         }
@@ -56,9 +55,7 @@ export async function signup(state: FormState, formData: FormData) {
     const user = await prisma.user.create({data: {name: name, email: email, password: hashedpass}})
 
     if(!user) { return {message: 'An error occurred while creating your account.'}}
-
-    //await createSession(user.public_id)
-    redirect('/product-list')
+    redirect('/login')
   } catch(error) {
     return {message: 'An unexpected error ocurred. please try again later'}
   }
